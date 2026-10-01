@@ -1,0 +1,3 @@
+import crypto from 'node:crypto';
+const C='1554957413889741011', R='https://ssbenlisthq.netlify.app/auth/callback';
+export default async()=>{let state=crypto.randomBytes(24).toString('hex'),u=new URL('https://discord.com/oauth2/authorize');u.searchParams.set('client_id',C);u.searchParams.set('response_type','code');u.searchParams.set('redirect_uri',R);u.searchParams.set('scope','identify guilds.members.read');u.searchParams.set('state',state);return new Response(null,{status:302,headers:{Location:u.toString(),'Set-Cookie':`ssb_state=${state}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=600`}})};export const config={path:'/auth/login'};
